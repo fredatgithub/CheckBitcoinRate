@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckBitcoinRate", "CheckBitcoinRate\CheckBitcoinRate.csproj", "{BC708474-D428-4780-B15D-D9FF738E80DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC708474-D428-4780-B15D-D9FF738E80DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC708474-D428-4780-B15D-D9FF738E80DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC708474-D428-4780-B15D-D9FF738E80DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC708474-D428-4780-B15D-D9FF738E80DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECA12AF5-DE37-4F9B-83E7-77001507A35C}
+	EndGlobalSection
+EndGlobal
