@@ -32,6 +32,11 @@ namespace CheckBitcoinRate
         //display($"Le {item.Date}, le taux en euros est de {FormatNumber(item.RateEuros)} et le taux en dollar est de {FormatNumber(item.RateDollar)}");
       }
 
+      string queryMin = @"DECLARE @mini AS FLOAT; SELECT @mini = (select MIN([RateEuros])  FROM[CryptoCurrencies].[dbo].[BitCoin]); SELECT[Date] as 'Date mini', RateEuros, RateDollar FROM[CryptoCurrencies].[dbo].[BitCoin] WHERE RateEuros = @mini;";
+
+      string queryMax = @"DECLARE @maxi AS FLOAT; SELECT @maxi = (select MAX([RateEuros])  FROM[CryptoCurrencies].[dbo].[BitCoin]); SELECT[Date] as 'Date maxi', RateEuros, RateDollar FROM[CryptoCurrencies].[dbo].[BitCoin] WHERE RateEuros = @maxi;";
+
+
       display(string.Empty);
       display(string.Empty);
       Console.ForegroundColor = ConsoleColor.White;
