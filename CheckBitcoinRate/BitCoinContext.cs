@@ -1,4 +1,6 @@
+using System;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 
 namespace CheckBitcoinRate
 {
@@ -30,6 +32,12 @@ namespace CheckBitcoinRate
       modelBuilder.Entity<AchatVente>()
           .Property(e => e.FeeEuros)
           .HasPrecision(3, 2);
+    }
+
+    internal void BitCoinMinimum(ObjectParameter miniRateDate, ObjectParameter miniRateEuro, ObjectParameter miniRateDollar)
+    {
+      // add code
+
     }
   }
 }
