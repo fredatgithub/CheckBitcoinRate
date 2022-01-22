@@ -26,7 +26,7 @@ namespace CheckBitcoinRate
         DisplayColorLetters(ConsoleColor.White, $", le taux est de ");
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateEuros)} ");
         DisplayColorLetters(ConsoleColor.Red, $"euros");
-        DisplayColorLetters(ConsoleColor.White, $" et ");
+        DisplayColorLetters(ConsoleColor.White, $" soit ");
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateDollar)} ");
         DisplayColorLetters(ConsoleColor.Red, $"dollars.");
 
@@ -34,52 +34,49 @@ namespace CheckBitcoinRate
       }
 
       listOfRates = new List<BitCoin>();
-      string queryMin = @"DECLARE @mini AS FLOAT; SELECT @mini = (select MIN([RateEuros])  FROM [CryptoCurrencies].[dbo].[BitCoin]); SELECT[Date] as 'Date mini', RateEuros, RateDollar FROM [CryptoCurrencies].[dbo].[BitCoin] WHERE RateEuros = @mini;";
-      queryMin = "EXEC [CryptoCurrencies].[dbo].[BitCoinMinimum]";
-      queryMin = @"DECLARE	@return_value int; EXECUTE	@return_value = [CryptoCurrencies].[dbo].[BitCoinMinimum]; SELECT	'Return Value' = @return_value";
-      queryMin = "";
-      ObjectParameter miniRateDate = new ObjectParameter("miniRateDate", typeof(DateTime));
-      ObjectParameter miniRateEuro = new ObjectParameter("miniRateEuro", typeof(float));
-      ObjectParameter miniRateDollar = new ObjectParameter("miniRateDollar", typeof(float));
+      string queryMin = "SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] ORDER BY RateEuros ASC;";
       using (var context = new BitCoinContext())
       {
-        // listOfRates = context.BitCoins.SqlQuery(queryMin).ToList();
-        context.BitCoinMinimum(miniRateDate, miniRateEuro, miniRateDollar);
+        listOfRates = context.BitCoins.SqlQuery(queryMin).ToList();
       }
 
-      DateTime resultDate = Convert.ToDateTime(miniRateDate.Value);
-      decimal resultEuro = Convert.ToDecimal(miniRateEuro.Value);
-      decimal resultDollar = Convert.ToDecimal(miniRateDollar.Value);
-
+      display(string.Empty);
+      display(string.Empty);
       Console.ForegroundColor = ConsoleColor.Green;
       foreach (var item in listOfRates)
       {
         DisplayColorLetters(ConsoleColor.White, "Le ");
         DisplayColorLetters(ConsoleColor.Green, $"{item.Date}");
-        DisplayColorLetters(ConsoleColor.White, $", le taux le plus bas était de ");
+        DisplayColorLetters(ConsoleColor.White, $", le taux le plus ");
+        DisplayColorLetters(ConsoleColor.Red, $"bas");
+        DisplayColorLetters(ConsoleColor.White, $"  est de ");
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateEuros)} ");
         DisplayColorLetters(ConsoleColor.Red, $"euros");
-        DisplayColorLetters(ConsoleColor.White, $" et ");
+        DisplayColorLetters(ConsoleColor.White, $"  soit ");
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateDollar)} ");
         DisplayColorLetters(ConsoleColor.Red, $"dollars.");
       }
 
       listOfRates = new List<BitCoin>();
-      string queryMax = @"DECLARE @maxi AS FLOAT; SELECT @maxi = (select MAX([RateEuros])  FROM[CryptoCurrencies].[dbo].[BitCoin]); SELECT[Date] as 'Date maxi', RateEuros, RateDollar FROM[CryptoCurrencies].[dbo].[BitCoin] WHERE RateEuros = @maxi;";
+      string queryMax = @"SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] 	ORDER BY RateEuros DESC;";
       using (var context = new BitCoinContext())
       {
-        // listOfRates = context.BitCoins.SqlQuery(queryMax).ToList();
+        listOfRates = context.BitCoins.SqlQuery(queryMax).ToList();
       }
 
+      display(string.Empty);
+      display(string.Empty);
       Console.ForegroundColor = ConsoleColor.Green;
       foreach (var item in listOfRates)
       {
         DisplayColorLetters(ConsoleColor.White, "Le ");
         DisplayColorLetters(ConsoleColor.Green, $"{item.Date}");
-        DisplayColorLetters(ConsoleColor.White, $", le taux le plus haut est de ");
+        DisplayColorLetters(ConsoleColor.White, $", le taux le plus ");
+        DisplayColorLetters(ConsoleColor.Red, $"haut");
+        DisplayColorLetters(ConsoleColor.White, $" est de ");
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateEuros)} ");
         DisplayColorLetters(ConsoleColor.Red, $"euros");
-        DisplayColorLetters(ConsoleColor.White, $" et ");
+        DisplayColorLetters(ConsoleColor.White, $" soit ");
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateDollar)} ");
         DisplayColorLetters(ConsoleColor.Red, $"dollars.");
       }
