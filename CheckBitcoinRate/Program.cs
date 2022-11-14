@@ -80,8 +80,6 @@ namespace CheckBitcoinRate
         DisplayColorLetters(ConsoleColor.Red, $"dollars.");
       }
            
-
-
       display(string.Empty);
       display(string.Empty);
       Console.ForegroundColor = ConsoleColor.White;
