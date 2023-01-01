@@ -79,7 +79,7 @@ namespace CheckBitcoinRate
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateDollar)} ");
         DisplayColorLetters(ConsoleColor.Red, $"dollars.");
       }
-           
+
       display(string.Empty);
       display(string.Empty);
       Console.ForegroundColor = ConsoleColor.White;
@@ -94,7 +94,7 @@ namespace CheckBitcoinRate
 
     private static void DisplayColorLetters(ConsoleColor color, string message)
     {
-      Console.ForegroundColor= color;
+      Console.ForegroundColor = color;
       Console.Write(message);
     }
   }

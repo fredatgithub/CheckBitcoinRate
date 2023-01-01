@@ -1,4 +1,3 @@
-using System;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 
@@ -37,7 +36,6 @@ namespace CheckBitcoinRate
     internal void BitCoinMinimum(ObjectParameter miniRateDate, ObjectParameter miniRateEuro, ObjectParameter miniRateDollar)
     {
       // add code
-
     }
   }
 }
