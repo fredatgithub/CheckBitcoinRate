@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CheckBitcoinRate
 {
@@ -89,7 +91,14 @@ namespace CheckBitcoinRate
 
     private static string FormatNumber(double number)
     {
-      return string.Format("{0,1:N2}", number);
+      //return string.Format("{0,1:N2}", number);
+      //return number.ToString(CultureInfo.InvariantCulture.NumberFormat);
+      //return number.ToString(CultureInfo.CurrentCulture.NumberFormat);
+      //return string.Format("{0:0,0}", number); 
+      //var specifier = "F";
+      //var culture = CultureInfo.CreateSpecificCulture("fr-FR");
+      //return number.ToString(specifier, culture);
+      return string.Format("{0:### ### ###.##}", number);
     }
 
     private static void DisplayColorLetters(ConsoleColor color, string message)
