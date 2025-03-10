@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace CheckBitcoinRate
 {
@@ -30,12 +28,10 @@ namespace CheckBitcoinRate
         DisplayColorLetters(ConsoleColor.White, $" soit ");
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateDollar)} ");
         DisplayColorLetters(ConsoleColor.Red, $"dollars.");
-
-        //display($"Le {item.Date}, le taux en euros est de {FormatNumber(item.RateEuros)} et le taux en dollar est de {FormatNumber(item.RateDollar)}");
       }
 
       listOfRates = new List<BitCoin>();
-      string queryMin = "SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] ORDER BY RateEuros ASC;";
+      const string queryMin = "SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] ORDER BY RateEuros ASC;";
       using (var context = new BitCoinContext())
       {
         listOfRates = context.BitCoins.SqlQuery(queryMin).ToList();
@@ -59,7 +55,7 @@ namespace CheckBitcoinRate
       }
 
       listOfRates = new List<BitCoin>();
-      string queryMax = @"SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] 	ORDER BY RateEuros DESC;";
+      const string queryMax = @"SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] 	ORDER BY RateEuros DESC;";
       using (var context = new BitCoinContext())
       {
         listOfRates = context.BitCoins.SqlQuery(queryMax).ToList();
@@ -91,13 +87,6 @@ namespace CheckBitcoinRate
 
     private static string FormatNumber(double number)
     {
-      //return string.Format("{0,1:N2}", number);
-      //return number.ToString(CultureInfo.InvariantCulture.NumberFormat);
-      //return number.ToString(CultureInfo.CurrentCulture.NumberFormat);
-      //return string.Format("{0:0,0}", number); 
-      //var specifier = "F";
-      //var culture = CultureInfo.CreateSpecificCulture("fr-FR");
-      //return number.ToString(specifier, culture);
       return string.Format("{0:### ### ###.##}", number);
     }
 
