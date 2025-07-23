@@ -55,7 +55,7 @@ namespace CheckBitcoinRate
       }
 
       listOfRates = new List<BitCoin>();
-      const string queryMax = @"SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] 	ORDER BY RateEuros DESC;";
+      string queryMax = @"SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] 	ORDER BY RateEuros DESC;";
       using (var context = new BitCoinContext())
       {
         listOfRates = context.BitCoins.SqlQuery(queryMax).ToList();
@@ -69,7 +69,33 @@ namespace CheckBitcoinRate
         DisplayColorLetters(ConsoleColor.White, "Le ");
         DisplayColorLetters(ConsoleColor.Green, $"{item.Date}");
         DisplayColorLetters(ConsoleColor.White, $", le taux le plus ");
-        DisplayColorLetters(ConsoleColor.Red, $"haut");
+        DisplayColorLetters(ConsoleColor.Red, $"haut en ");
+        DisplayColorLetters(ConsoleColor.Green, $"EURO");
+        DisplayColorLetters(ConsoleColor.White, $" est de ");
+        DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateEuros)} ");
+        DisplayColorLetters(ConsoleColor.Red, $"euros");
+        DisplayColorLetters(ConsoleColor.White, $" soit ");
+        DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateDollar)} ");
+        DisplayColorLetters(ConsoleColor.Red, $"dollars.");
+      }
+
+      listOfRates = new List<BitCoin>();
+      queryMax = @"SELECT TOP 1 [Date], [RateEuros], [RateDollar] FROM [CryptoCurrencies].[dbo].[BitCoin] 	ORDER BY RateDollar DESC;";
+      using (var context = new BitCoinContext())
+      {
+        listOfRates = context.BitCoins.SqlQuery(queryMax).ToList();
+      }
+
+      display(string.Empty);
+      display(string.Empty);
+      Console.ForegroundColor = ConsoleColor.Green;
+      foreach (var item in listOfRates)
+      {
+        DisplayColorLetters(ConsoleColor.White, "Le ");
+        DisplayColorLetters(ConsoleColor.Green, $"{item.Date}");
+        DisplayColorLetters(ConsoleColor.White, $", le taux le plus ");
+        DisplayColorLetters(ConsoleColor.Red, $"haut en ");
+        DisplayColorLetters(ConsoleColor.Green, $"DOLLAR");
         DisplayColorLetters(ConsoleColor.White, $" est de ");
         DisplayColorLetters(ConsoleColor.Green, $"{FormatNumber(item.RateEuros)} ");
         DisplayColorLetters(ConsoleColor.Red, $"euros");
